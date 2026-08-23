@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>توتة وأنا</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div id="lockScreen" class="lock-screen">
+    <div class="lock-box">
+      <div class="lock-heart">🔒❤️</div>
+      <p class="lock-text">الصفحة دي ليكي بس يا توتة</p>
+      <input type="text" id="lockInput" class="lock-input" placeholder="اكتبي الكلمة السرية...">
+      <button id="lockBtn" class="lock-btn">افتحي</button>
+      <p id="lockError" class="lock-error hidden">لأ يا حبيبتي، جربي تاني ❤️</p>
+    </div>
+  </div>
+
+  <div id="mainContent" class="hidden">
+
+    <section class="hero">
+      <h1>❤️ يا توتة</h1>
+      <p class="subtitle">دي حكايتنا... من يوم ما بقينا "إحنا" لحد دلوقتي</p>
+      <p class="hint">دوسي على الصورة عشان تقلبي الصفحة ⟵</p>
+    </section>
+
+    <section class="book-wrap">
+      <div class="book" id="book"></div>
+      <div class="nav">
+        <button id="prevBtn">التالي ⟵</button>
+        <span id="pageCount"></span>
+        <button id="nextBtn">⟶ السابق</button>
+      </div>
+      <button id="surpriseBtn" class="surprise-btn hidden">🎁 فيه حاجة كمان ليكي...</button>
+    </section>
+
+    <section class="closing">
+      <p>ودي لسه البداية بس يا توتة... فيه ذكريات كتير جاية نضيفها هنا مع بعض ❤️</p>
+    </section>
+
+  </div>
+
+  <div id="surpriseOverlay" class="overlay hidden">
+    <div class="letter">
+      <button id="closeOverlay" class="close-btn">✕</button>
+      <div class="letter-hearts">❤️❤️❤️</div>
+      <p class="letter-text">Bahebek awy ya agmal toota f hayaty kolaha, ana maleesh gheirek w msh hayeb'a leya gheirek. Ana omry ma kont atakhayal en ehna neb'a hena wala keda, omry ma kont atakhayal en fy oz3a hathebeny keda w tekhaleeny atghayar 180 daraga. Hafdal dayman ahebek w afdal ganbek leghayet ma teb'y aktar ensana mabsota fel denya ashan ana bahebek. Kol sana wehna makhtoben w benheb ba3d ya habebty. Awel sana leena makhtobeeeeen ❤️</p>
+      <p class="letter-signoff">BAHEBEK YA TOOT ❤️</p>
+      <p class="letter-credit">DONE BY: MEGAMIND</p>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

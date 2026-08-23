@@ -125,3 +125,57 @@ function buildPages() {
     if (!m.noPhoto) {
       const photoContent = m.photo
         ? `<img src="${m.photo}" alt="${m.date}">`
+        : `<div class="placeholder">📷 حطي الصورة هنا لاحقاً</div>`;
+      photoBlock = `<div class="page-photo">${photoContent}</div>`;
+    }
+
+    page.innerHTML = `
+      <div class="page-date"><span class="heart">❤️</span><span class="date-text">${m.date}</span></div>
+      ${photoBlock}
+      <div class="page-text">${m.text}</div>
+    `;
+    book.appendChild(page);
+  });
+  updateView();
+}
+
+function updateView() {
+  const pages = document.querySelectorAll('.page');
+  pages.forEach((page, i) => {
+    page.classList.toggle('flipped', i < current);
+  });
+  pageCount.textContent = `${current + 1} / ${moments.length}`;
+  prevBtn.disabled = current >= moments.length - 1;
+  nextBtn.disabled = current <= 0;
+  surpriseBtn.classList.toggle('hidden', current !== moments.length - 1);
+}
+
+nextBtn.addEventListener('click', () => {
+  if (current > 0) {
+    current--;
+    updateView();
+  }
+});
+
+prevBtn.addEventListener('click', () => {
+  if (current < moments.length - 1) {
+    current++;
+    updateView();
+  }
+});
+
+surpriseBtn.addEventListener('click', (e) => {
+  const rect = surpriseBtn.getBoundingClientRect();
+  burstHearts(rect.left + rect.width / 2, rect.top + rect.height / 2);
+  surpriseOverlay.classList.remove('hidden');
+});
+
+closeOverlay.addEventListener('click', () => {
+  surpriseOverlay.classList.add('hidden');
+});
+
+surpriseOverlay.addEventListener('click', (e) => {
+  if (e.target === surpriseOverlay) surpriseOverlay.classList.add('hidden');
+});
+
+buildPages();

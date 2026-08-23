@@ -11,6 +11,7 @@ function tryUnlock() {
   if (lockInput.value.trim().toLowerCase() === CORRECT_PASSWORD.toLowerCase()) {
     lockScreen.classList.add('hidden');
     mainContent.classList.remove('hidden');
+    setTimeout(typeSubtitle, 300);
   } else {
     lockError.classList.remove('hidden');
   }
@@ -21,9 +22,64 @@ lockInput.addEventListener('keydown', (e) => {
   if (e.key === 'Enter') tryUnlock();
 });
 
+// --- Typing effect for subtitle ---
+function typeSubtitle() {
+  const el = document.getElementById('subtitle');
+  const text = 'دي حكايتنا... من يوم ما بقينا "إحنا" لحد دلوقتي';
+  el.textContent = '';
+  let i = 0;
+  function step() {
+    if (i <= text.length) {
+      el.textContent = text.slice(0, i);
+      i++;
+      setTimeout(step, 45);
+    }
+  }
+  step();
+}
+
+// --- Floating hearts background ---
+const heartsBg = document.getElementById('heartsBg');
+
+function spawnFloatingHeart() {
+  const heart = document.createElement('div');
+  heart.className = 'floating-heart';
+  heart.textContent = '❤';
+  const left = Math.random() * 100;
+  const size = 12 + Math.random() * 16;
+  const duration = 8 + Math.random() * 7;
+  heart.style.left = left + 'vw';
+  heart.style.setProperty('--size', size + 'px');
+  heart.style.setProperty('--duration', duration + 's');
+  heartsBg.appendChild(heart);
+  setTimeout(() => heart.remove(), duration * 1000 + 500);
+}
+
+setInterval(spawnFloatingHeart, 700);
+for (let i = 0; i < 5; i++) {
+  setTimeout(spawnFloatingHeart, i * 300);
+}
+
+// --- Burst hearts on surprise click ---
+function burstHearts(x, y) {
+  for (let i = 0; i < 18; i++) {
+    const h = document.createElement('div');
+    h.className = 'burst-heart';
+    h.textContent = '❤️';
+    const angle = Math.random() * Math.PI * 2;
+    const distance = 80 + Math.random() * 120;
+    const tx = Math.cos(angle) * distance;
+    const ty = Math.sin(angle) * distance;
+    h.style.setProperty('--tx', tx + 'px');
+    h.style.setProperty('--ty', ty + 'px');
+    h.style.left = x + 'px';
+    h.style.top = y + 'px';
+    document.body.appendChild(h);
+    setTimeout(() => h.remove(), 950);
+  }
+}
+
 // --- Timeline moments ---
-// Add or edit moments here. photo: leave "" if you don't have the image yet.
-// Add noPhoto: true to a moment to skip the photo box entirely (no placeholder shown).
 const moments = [
   {
     date: "25 October 2023",
@@ -69,55 +125,3 @@ function buildPages() {
     if (!m.noPhoto) {
       const photoContent = m.photo
         ? `<img src="${m.photo}" alt="${m.date}">`
-        : `<div class="placeholder">📷 حطي الصورة هنا لاحقاً</div>`;
-      photoBlock = `<div class="page-photo">${photoContent}</div>`;
-    }
-
-    page.innerHTML = `
-      <div class="page-date"><span class="heart">❤️</span><span class="date-text">${m.date}</span></div>
-      ${photoBlock}
-      <div class="page-text">${m.text}</div>
-    `;
-    book.appendChild(page);
-  });
-  updateView();
-}
-
-function updateView() {
-  const pages = document.querySelectorAll('.page');
-  pages.forEach((page, i) => {
-    page.classList.toggle('flipped', i < current);
-  });
-  pageCount.textContent = `${current + 1} / ${moments.length}`;
-  prevBtn.disabled = current >= moments.length - 1;
-  nextBtn.disabled = current <= 0;
-  surpriseBtn.classList.toggle('hidden', current !== moments.length - 1);
-}
-
-nextBtn.addEventListener('click', () => {
-  if (current > 0) {
-    current--;
-    updateView();
-  }
-});
-
-prevBtn.addEventListener('click', () => {
-  if (current < moments.length - 1) {
-    current++;
-    updateView();
-  }
-});
-
-surpriseBtn.addEventListener('click', () => {
-  surpriseOverlay.classList.remove('hidden');
-});
-
-closeOverlay.addEventListener('click', () => {
-  surpriseOverlay.classList.add('hidden');
-});
-
-surpriseOverlay.addEventListener('click', (e) => {
-  if (e.target === surpriseOverlay) surpriseOverlay.classList.add('hidden');
-});
-
-buildPages();

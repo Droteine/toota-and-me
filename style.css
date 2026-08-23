@@ -270,3 +270,82 @@ body {
   font-size: 1.3rem;
   cursor: pointer;
 }
+
+.lock-screen {
+  min-height: 100vh;
+  min-height: 100dvh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 1.5rem;
+  background: radial-gradient(circle at center, #1a1024 0%, #0a0a0f 70%);
+}
+
+.lock-box {
+  text-align: center;
+  width: 100%;
+  max-width: 400px;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(14px);
+  border: 1px solid rgba(217, 184, 255, 0.25);
+  border-radius: 28px;
+  padding: 3rem 2rem;
+  box-shadow: 0 25px 70px rgba(0, 0, 0, 0.5);
+}
+
+.lock-heart {
+  font-size: 4rem;
+  margin-bottom: 1.5rem;
+}
+
+.lock-text {
+  color: #f5f5f5;
+  font-size: 1.4rem;
+  font-weight: 700;
+  margin-bottom: 2.2rem;
+  line-height: 1.6;
+}
+
+.lock-input {
+  width: 100%;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(217, 184, 255, 0.4);
+  border-radius: 16px;
+  padding: 1.1rem 1.3rem;
+  color: #f5f5f5;
+  font-family: inherit;
+  font-size: 1.1rem;
+  text-align: center;
+  margin-bottom: 1.2rem;
+  outline: none;
+  transition: border-color 0.2s ease;
+}
+
+.lock-input:focus {
+  border-color: #d9b8ff;
+}
+
+.lock-btn {
+  width: 100%;
+  background: linear-gradient(90deg, #d9b8ff, #ffffff);
+  border: none;
+  color: #1a1024;
+  font-family: inherit;
+  font-weight: 800;
+  font-size: 1.1rem;
+  padding: 1.1rem 2rem;
+  border-radius: 16px;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.lock-btn:hover {
+  transform: scale(1.02);
+}
+
+.lock-error {
+  color: #ff9fb0;
+  margin-top: 1.2rem;
+  font-size: 1rem;
+}
